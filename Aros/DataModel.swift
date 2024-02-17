@@ -8,6 +8,7 @@
 import AVFoundation
 import SwiftUI
 import os.log
+import Security
 
 final class DataModel: ObservableObject {
     let camera = Camera()
@@ -68,11 +69,47 @@ final class DataModel: ObservableObject {
         return PhotoData(thumbnailImage: thumbnailImage, thumbnailSize: thumbnailSize, imageData: imageData, imageSize: imageSize)
     }
     
+    func retrievePrivateKey() -> SecKey? {
+        let query: [String: Any] = [
+            kSecClass as String:               kSecClassKey,
+            kSecAttrKeyType as String:         kSecAttrKeyTypeECSECPrimeRandom,
+            kSecAttrTokenID as String:         kSecAttrTokenIDSecureEnclave,
+            kSecAttrLabel as String:           "com.example.myapp.privatekey",
+            kSecReturnRef as String:           true
+        ]
+
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+        if status == errSecSuccess {
+            return (item as! SecKey)
+        } else {
+            // Handle error (e.g., key not found)
+            print("Error retrieving private key: \(status)")
+            return nil
+        }
+    }
+    
     func savePhoto(imageData: Data) {
         Task {
             do {
                 try await photoCollection.addImage(imageData)
                 logger.debug("Added image data to photo collection.")
+                if let privateKey = retrievePrivateKey() {
+                    print("Successfully retrieved the private key.")
+                    if let publicKey = SecKeyCopyPublicKey(privateKey) {
+                        if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
+                            // Convert the public key data to a string to print it.
+                            let publicKeyString = publicKeyData.base64EncodedString()
+                            print("Public Key: \(publicKeyString)")
+                        } else {
+                            print("Failed to extract the public key data.")
+                        }
+                    } else {
+                        print("Failed to retrieve the public key.")
+                    }
+                } else {
+                    print("Failed to retrieve the private key.")
+                }
             } catch let error {
                 logger.error("Failed to add image to photo collection: \(error.localizedDescription)")
             }

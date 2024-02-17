@@ -6,10 +6,41 @@
 //
 
 import SwiftUI
+import Security
 
 @main
 struct ArosApp: App {
     init() {
+        let accessControl = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
+            kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+            [.privateKeyUsage, .biometryAny], nil)!
+        let attributes: [String: Any] = [
+            kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
+            kSecAttrKeySizeInBits as String:      256,
+            kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave,
+            kSecPrivateKeyAttrs as String: [
+                kSecAttrIsPermanent as String:    true,
+                kSecAttrAccessControl as String:   accessControl,
+                kSecAttrLabel as String:           "com.example.myapp.privatekey"
+            ]
+        ]
+
+        var error: Unmanaged<CFError>?
+        guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
+            print("Error creating key: \((error!.takeRetainedValue() as Error).localizedDescription)")
+            return
+        }
+
+        guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
+            print("Error retrieving public key")
+            return
+        }
+        
+        if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
+            print("Public Key: \(publicKeyData as NSData)")
+        } else {
+            print("Failed to extract public key for logging.")
+        }
         UINavigationBar.applyCustomAppearance()
     }
     
