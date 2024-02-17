@@ -10,5 +10,7 @@
 	<string>$(PRODUCT_NAME) photo library use</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) photo library use</string>
+	<key>NSIdentityUsageDescription</key>
+	<string>$(PRODUCT_NAME) identity use</string>
 </dict>
 </plist>

@@ -63,6 +63,7 @@
 		352FE5542B808EBD00F2BBF7 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		352FE5562B808ECE00F2BBF7 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		352FE5582B808EEA00F2BBF7 /* ThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailView.swift; sourceTree = "<group>"; };
+		352FE55A2B80B62100F2BBF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		35D60E742B808B07000E2D3D /* CachedImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageManager.swift; sourceTree = "<group>"; };
 		35D60E762B808B37000E2D3D /* PhotoAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAsset.swift; sourceTree = "<group>"; };
 		35D60E782B808B61000E2D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/Capturing Photos.swiftpm/App/Assets.xcassets"; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 		878655602B8078310077B123 /* Aros */ = {
 			isa = PBXGroup;
 			children = (
+				352FE55A2B80B62100F2BBF7 /* Info.plist */,
 				35D60E782B808B61000E2D3D /* Assets.xcassets */,
 				35D60E742B808B07000E2D3D /* CachedImageManager.swift */,
 				35D60E842B808D5D000E2D3D /* Camera.swift */,
@@ -496,6 +498,7 @@
 				DEVELOPMENT_TEAM = BC4N6HVBUG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Aros/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -525,6 +528,7 @@
 				DEVELOPMENT_TEAM = BC4N6HVBUG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Aros/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
