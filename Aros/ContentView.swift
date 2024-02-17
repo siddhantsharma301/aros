@@ -64,8 +64,7 @@ struct ContentView: View {
                 
                 TextField("Enter username", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .disabled(false)
+                    .padding(.horizontal, 50)
                 
                 
                 Button(action: {
