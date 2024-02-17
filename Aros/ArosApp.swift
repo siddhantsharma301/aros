@@ -23,7 +23,7 @@ struct ArosApp: App {
                     kSecPrivateKeyAttrs as String: [
                         kSecAttrIsPermanent as String:    true,
                         kSecAttrAccessControl as String:   accessControl,
-                        kSecAttrLabel as String:           "com.example.myapp.privatekey"
+                        kSecAttrLabel as String:           "com.aros.privatekey"
                     ]
                 ]
 
@@ -61,7 +61,7 @@ struct ArosApp: App {
             kSecClass as String:               kSecClassKey,
             kSecAttrKeyType as String:         kSecAttrKeyTypeECSECPrimeRandom,
             kSecAttrTokenID as String:         kSecAttrTokenIDSecureEnclave,
-            kSecAttrLabel as String:           "com.example.myapp.privatekey",
+            kSecAttrLabel as String:           "com.aros.privatekey",
             kSecReturnRef as String:           true
         ]
 

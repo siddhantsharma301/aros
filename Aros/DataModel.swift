@@ -8,6 +8,7 @@
 import AVFoundation
 import SwiftUI
 import os.log
+import CryptoKit
 import Security
 
 final class DataModel: ObservableObject {
@@ -47,6 +48,23 @@ final class DataModel: ObservableObject {
         for await photoData in unpackedPhotoStream {
             Task { @MainActor in
                 thumbnailImage = photoData.thumbnailImage
+                let hashedData = hashImageData(photoData: photoData.imageData)
+                do {
+                    if let privateKey = retrievePrivateKey() {
+                        print("Successfully retrieved the private key.")
+                        let algorithm: SecKeyAlgorithm = .ecdsaSignatureMessageX962SHA256
+                        var error: Unmanaged<CFError>?
+                        guard let signature = SecKeyCreateSignature(privateKey,
+                                                                    algorithm,
+                                                                    Data(hashedData) as CFData,
+                                                                    &error) as Data? else {
+                            throw error!.takeRetainedValue() as Error
+                        }
+                        print("Signature: \(signature)")
+                    }
+                } catch let error {
+                    print("signing failed")
+                }
             }
             savePhoto(imageData: photoData.imageData)
         }
@@ -93,23 +111,6 @@ final class DataModel: ObservableObject {
         Task {
             do {
                 try await photoCollection.addImage(imageData)
-                logger.debug("Added image data to photo collection.")
-                if let privateKey = retrievePrivateKey() {
-                    print("Successfully retrieved the private key.")
-                    if let publicKey = SecKeyCopyPublicKey(privateKey) {
-                        if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
-                            // Convert the public key data to a string to print it.
-                            let publicKeyString = publicKeyData.base64EncodedString()
-                            print("Public Key: \(publicKeyString)")
-                        } else {
-                            print("Failed to extract the public key data.")
-                        }
-                    } else {
-                        print("Failed to retrieve the public key.")
-                    }
-                } else {
-                    print("Failed to retrieve the private key.")
-                }
             } catch let error {
                 logger.error("Failed to add image to photo collection: \(error.localizedDescription)")
             }
@@ -145,6 +146,11 @@ final class DataModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    private func hashImageData(photoData: Data) -> SHA256Digest {
+        let hash = SHA256.hash(data: photoData)
+        return hash as SHA256Digest
     }
 }
 
