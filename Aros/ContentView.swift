@@ -12,6 +12,27 @@ import UIKit
 struct ContentView: View {
     @State private var navigate = false
     
+    // has the user already signed in before? / do they already have a key?
+    @State private var notFirstTime = false
+    
+    // State to manage the visibility of the success message
+    @State private var showSuccessMessage = false
+    // State to manage navigation
+    @State private var navigateToNextPage = false
+    
+    @State private var navigateMessage = "Keys successfully generated."
+    
+    @State private var username: String = ""
+    
+    init() {
+        notFirstTime = privateKeyExists()
+        if (notFirstTime) {
+            navigateToNextPage = true
+        }
+        print("init")
+        print(navigateToNextPage)
+    }
+    
     func triggerHapticFeedback() {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
@@ -41,10 +62,17 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .padding()
                 
+                TextField("Enter username", text: $username)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .disabled(false)
+                
+                
                 Button(action: {
                         // Your onClick action here
+                        // TODO (anjan): upload (username, public key) to registry
                         print("Key being generated")
-                    
+                        
                         if retrievePrivateKey() == nil {
                             // Key does not exist, so create it.
                             let accessControl = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
@@ -80,35 +108,64 @@ struct ContentView: View {
                         } else {
                             // Key already exists, proceed with your logic, e.g., retrieving the key.
                             print("Key pair already exists.")
+                            navigateMessage = "Key pair already exists."
                         }
                     
-//                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                        showSuccessMessage = true
+                                        
+                        // Wait for 1.5 seconds, then navigate
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            navigateToNextPage = true
+                        }
+                    
+                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                         
-                            
-                    // Example usage to create a series of vibrations that lasts for about 5 seconds
-                    // This attempts to vibrate the device 10 times with a half-second (0.5) interval between each vibration.
-                    repeatVibration(numberOfTimes: 10, interval: 0.1)
-//                        triggerHapticFeedback()
-                        // Trigger navigation
-                        navigate = true
-                    }) {
+                    }
+    
+                ) {
                         Text("Generate Key in Secure Enclave")
                             .padding()
                             .background(Color.blue)
                             .foregroundColor(.white)
                             .cornerRadius(10)
-                    }
+                        
+                        
+                    }.disabled(username.isEmpty)
                     
+                    if showSuccessMessage {
+                        Text(navigateMessage)
+                    }
+                
                     // Invisible NavigationLink
-                    NavigationLink(destination: CameraView(), isActive: $navigate) {
+                    NavigationLink(destination: CameraView(), isActive: $navigateToNextPage) {
                         EmptyView()
                     }
                 
             }
+            .buttonStyle(PlainButtonStyle())
             .padding() // Add padding around the VStack content
         }
     }
     
+    func privateKeyExists() -> Bool {
+        let query: [String: Any] = [
+            kSecClass as String:               kSecClassKey,
+            kSecAttrKeyType as String:         kSecAttrKeyTypeECSECPrimeRandom,
+            kSecAttrTokenID as String:         kSecAttrTokenIDSecureEnclave,
+            kSecAttrLabel as String:           "com.aros.privatekey",
+            kSecReturnRef as String:           true
+        ]
+
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+        if status == errSecSuccess {
+            
+            return true
+        } else {
+            // Handle error (e.g., key not found)
+            return false
+        }
+    }
     
     func retrievePrivateKey() -> SecKey? {
         let query: [String: Any] = [
