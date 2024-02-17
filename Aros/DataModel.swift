@@ -92,7 +92,7 @@ final class DataModel: ObservableObject {
             kSecClass as String:               kSecClassKey,
             kSecAttrKeyType as String:         kSecAttrKeyTypeECSECPrimeRandom,
             kSecAttrTokenID as String:         kSecAttrTokenIDSecureEnclave,
-            kSecAttrLabel as String:           "com.example.myapp.privatekey",
+            kSecAttrLabel as String:           "com.aros.privatekey",
             kSecReturnRef as String:           true
         ]
 
