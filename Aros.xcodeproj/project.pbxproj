@@ -7,9 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		352FE5512B808E7700F2BBF7 /* PhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FE5502B808E7700F2BBF7 /* PhotoCollectionView.swift */; };
+		352FE5532B808E9800F2BBF7 /* PhotoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FE5522B808E9800F2BBF7 /* PhotoItemView.swift */; };
+		352FE5552B808EBD00F2BBF7 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FE5542B808EBD00F2BBF7 /* PhotoLibrary.swift */; };
+		352FE5572B808ECE00F2BBF7 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FE5562B808ECE00F2BBF7 /* PhotoView.swift */; };
+		352FE5592B808EEA00F2BBF7 /* ThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FE5582B808EEA00F2BBF7 /* ThumbnailView.swift */; };
+		35D60E752B808B07000E2D3D /* CachedImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E742B808B07000E2D3D /* CachedImageManager.swift */; };
+		35D60E772B808B37000E2D3D /* PhotoAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E762B808B37000E2D3D /* PhotoAsset.swift */; };
+		35D60E792B808B61000E2D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D60E782B808B61000E2D3D /* Assets.xcassets */; };
+		35D60E7A2B808B61000E2D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D60E782B808B61000E2D3D /* Assets.xcassets */; };
+		35D60E7B2B808B61000E2D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D60E782B808B61000E2D3D /* Assets.xcassets */; };
+		35D60E7D2B808C44000E2D3D /* ViewfinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E7C2B808C44000E2D3D /* ViewfinderView.swift */; };
+		35D60E7E2B808C44000E2D3D /* ViewfinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E7C2B808C44000E2D3D /* ViewfinderView.swift */; };
+		35D60E7F2B808C44000E2D3D /* ViewfinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E7C2B808C44000E2D3D /* ViewfinderView.swift */; };
+		35D60E812B808CF0000E2D3D /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E802B808CF0000E2D3D /* DataModel.swift */; };
+		35D60E822B808CF0000E2D3D /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E802B808CF0000E2D3D /* DataModel.swift */; };
+		35D60E832B808CF0000E2D3D /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E802B808CF0000E2D3D /* DataModel.swift */; };
+		35D60E852B808D5D000E2D3D /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E842B808D5D000E2D3D /* Camera.swift */; };
+		35D60E862B808D5D000E2D3D /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E842B808D5D000E2D3D /* Camera.swift */; };
+		35D60E872B808D5D000E2D3D /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E842B808D5D000E2D3D /* Camera.swift */; };
+		35D60E892B808D80000E2D3D /* PhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E882B808D80000E2D3D /* PhotoCollection.swift */; };
+		35D60E8A2B808D80000E2D3D /* PhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E882B808D80000E2D3D /* PhotoCollection.swift */; };
+		35D60E8B2B808D80000E2D3D /* PhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E882B808D80000E2D3D /* PhotoCollection.swift */; };
+		35D60E8D2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */; };
+		35D60E8E2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */; };
+		35D60E8F2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */; };
 		878655622B8078310077B123 /* ArosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878655612B8078310077B123 /* ArosApp.swift */; };
 		878655642B8078310077B123 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878655632B8078310077B123 /* ContentView.swift */; };
-		878655662B8078330077B123 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 878655652B8078330077B123 /* Assets.xcassets */; };
 		878655692B8078330077B123 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 878655682B8078330077B123 /* Preview Assets.xcassets */; };
 		878655732B8078330077B123 /* ArosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878655722B8078330077B123 /* ArosTests.swift */; };
 		8786557D2B8078330077B123 /* ArosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8786557C2B8078330077B123 /* ArosUITests.swift */; };
@@ -34,10 +58,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		352FE5502B808E7700F2BBF7 /* PhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionView.swift; sourceTree = "<group>"; };
+		352FE5522B808E9800F2BBF7 /* PhotoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItemView.swift; sourceTree = "<group>"; };
+		352FE5542B808EBD00F2BBF7 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
+		352FE5562B808ECE00F2BBF7 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		352FE5582B808EEA00F2BBF7 /* ThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailView.swift; sourceTree = "<group>"; };
+		35D60E742B808B07000E2D3D /* CachedImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageManager.swift; sourceTree = "<group>"; };
+		35D60E762B808B37000E2D3D /* PhotoAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAsset.swift; sourceTree = "<group>"; };
+		35D60E782B808B61000E2D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/Capturing Photos.swiftpm/App/Assets.xcassets"; sourceTree = "<group>"; };
+		35D60E7C2B808C44000E2D3D /* ViewfinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewfinderView.swift; sourceTree = "<group>"; };
+		35D60E802B808CF0000E2D3D /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		35D60E842B808D5D000E2D3D /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		35D60E882B808D80000E2D3D /* PhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollection.swift; sourceTree = "<group>"; };
+		35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetCollection.swift; sourceTree = "<group>"; };
 		8786555E2B8078310077B123 /* Aros.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aros.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		878655612B8078310077B123 /* ArosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArosApp.swift; sourceTree = "<group>"; };
 		878655632B8078310077B123 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		878655652B8078330077B123 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		878655682B8078330077B123 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8786556E2B8078330077B123 /* ArosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		878655722B8078330077B123 /* ArosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArosTests.swift; sourceTree = "<group>"; };
@@ -94,10 +130,22 @@
 		878655602B8078310077B123 /* Aros */ = {
 			isa = PBXGroup;
 			children = (
+				35D60E782B808B61000E2D3D /* Assets.xcassets */,
+				35D60E742B808B07000E2D3D /* CachedImageManager.swift */,
+				35D60E842B808D5D000E2D3D /* Camera.swift */,
 				878655612B8078310077B123 /* ArosApp.swift */,
 				878655632B8078310077B123 /* ContentView.swift */,
-				878655652B8078330077B123 /* Assets.xcassets */,
+				35D60E802B808CF0000E2D3D /* DataModel.swift */,
+				35D60E762B808B37000E2D3D /* PhotoAsset.swift */,
+				35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */,
+				35D60E882B808D80000E2D3D /* PhotoCollection.swift */,
 				878655672B8078330077B123 /* Preview Content */,
+				352FE5502B808E7700F2BBF7 /* PhotoCollectionView.swift */,
+				352FE5522B808E9800F2BBF7 /* PhotoItemView.swift */,
+				352FE5542B808EBD00F2BBF7 /* PhotoLibrary.swift */,
+				352FE5562B808ECE00F2BBF7 /* PhotoView.swift */,
+				352FE5582B808EEA00F2BBF7 /* ThumbnailView.swift */,
+				35D60E7C2B808C44000E2D3D /* ViewfinderView.swift */,
 			);
 			path = Aros;
 			sourceTree = "<group>";
@@ -191,7 +239,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					8786555D2B8078310077B123 = {
 						CreatedOnToolsVersion = 14.2;
@@ -232,7 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				878655692B8078330077B123 /* Preview Assets.xcassets in Resources */,
-				878655662B8078330077B123 /* Assets.xcassets in Resources */,
+				35D60E792B808B61000E2D3D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35D60E7A2B808B61000E2D3D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +296,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35D60E7B2B808B61000E2D3D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +308,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				878655642B8078310077B123 /* ContentView.swift in Sources */,
+				352FE5572B808ECE00F2BBF7 /* PhotoView.swift in Sources */,
+				352FE5512B808E7700F2BBF7 /* PhotoCollectionView.swift in Sources */,
+				35D60E772B808B37000E2D3D /* PhotoAsset.swift in Sources */,
+				35D60E752B808B07000E2D3D /* CachedImageManager.swift in Sources */,
+				352FE5592B808EEA00F2BBF7 /* ThumbnailView.swift in Sources */,
+				352FE5552B808EBD00F2BBF7 /* PhotoLibrary.swift in Sources */,
+				35D60E7D2B808C44000E2D3D /* ViewfinderView.swift in Sources */,
+				352FE5532B808E9800F2BBF7 /* PhotoItemView.swift in Sources */,
 				878655622B8078310077B123 /* ArosApp.swift in Sources */,
+				35D60E852B808D5D000E2D3D /* Camera.swift in Sources */,
+				35D60E892B808D80000E2D3D /* PhotoCollection.swift in Sources */,
+				35D60E8D2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */,
+				35D60E812B808CF0000E2D3D /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +328,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35D60E862B808D5D000E2D3D /* Camera.swift in Sources */,
+				35D60E8E2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */,
+				35D60E8A2B808D80000E2D3D /* PhotoCollection.swift in Sources */,
 				878655732B8078330077B123 /* ArosTests.swift in Sources */,
+				35D60E7E2B808C44000E2D3D /* ViewfinderView.swift in Sources */,
+				35D60E822B808CF0000E2D3D /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +342,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8786557D2B8078330077B123 /* ArosUITests.swift in Sources */,
+				35D60E872B808D5D000E2D3D /* Camera.swift in Sources */,
+				35D60E832B808CF0000E2D3D /* DataModel.swift in Sources */,
+				35D60E7F2B808C44000E2D3D /* ViewfinderView.swift in Sources */,
+				35D60E8F2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */,
+				35D60E8B2B808D80000E2D3D /* PhotoCollection.swift in Sources */,
 				8786557F2B8078330077B123 /* ArosUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -331,6 +404,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -359,6 +433,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -391,6 +466,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -417,6 +493,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aros/Preview Content\"";
+				DEVELOPMENT_TEAM = BC4N6HVBUG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -445,6 +522,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aros/Preview Content\"";
+				DEVELOPMENT_TEAM = BC4N6HVBUG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
