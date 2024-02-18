@@ -55,17 +55,22 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) { // Adjust the spacing as needed
-                Image("aroslogo") // The name of the image in your asset catalog
+                Image("aros3") // The name of the image in your asset catalog
                     .resizable() // Make the image resizable
                     .scaledToFit() // Scale the image to fit its container
-                    .frame(width: 150, height: 150) // Specify the size of the image
-                
-                Text("Aros")
-                    .font(.largeTitle)
-                    .padding()
-                
+                    .frame(width: 400, height: 250) // Specify the size of the image
+                                
                 TextField("Enter username", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal, 20) // Simulates internal horizontal padding
+                    .padding(.vertical, 8) // Simulates internal vertical padding
+                    .background(Color.clear) // Ensures the TextField background is transparent
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.gray, lineWidth: 1)
+                    )
+                    .background(
+                        RoundedRectangle(cornerRadius: 8).fill(Color.white)
+                    )
                     .padding(.horizontal, 50)
                 
                 
@@ -152,9 +157,13 @@ struct ContentView: View {
                     if self.notFirstTime {
                         self.navigateToNextPage = true
                     }
-                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity) // Expand to fill available space
+            .background(Color(red: 0.1, green: 0.1, blue: 0.1)) // Set the background color of the VStack
+
             
         }
+
     }
     
     func privateKeyExists() -> Bool {
