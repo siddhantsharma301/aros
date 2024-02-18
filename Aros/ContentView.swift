@@ -24,6 +24,9 @@ struct ContentView: View {
     
     @State private var username: String = ""
     
+    @State private var showModal = false
+    @State private var pubKeySuccess = false
+    
     init() {
         notFirstTime = privateKeyExists()
         print("not first time")
@@ -108,7 +111,25 @@ struct ContentView: View {
 
                             if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
                                 print("Public Key: \(publicKeyData.base64EncodedString())")
-                                postPubKeyRequest(userId: username, pubKey: publicKeyData.base64EncodedString())
+                                postPubKeyRequest(userId: username, pubKey: publicKeyData.base64EncodedString()) { result in
+                                switch result {
+                                    case .success(let (status)):
+
+                                    self.showModal = true
+                                    if status {
+                                        print("Keys generated")
+
+                                        self.pubKeySuccess = true
+                                    } else {
+                                        print("Keys did not generate")
+                                        self.pubKeySuccess = false
+                                    }
+                                    case .failure(let error):
+                                        self.showModal = true
+                                        print("Keys did not generate")
+                                        self.pubKeySuccess = false
+                                }
+                            }
                             } else {
                                 print("Failed to extract public key for logging.")
                             }
@@ -140,14 +161,14 @@ struct ContentView: View {
                         
                     }.disabled(username.isEmpty)
                     
-                    if showSuccessMessage {
-                        Text(navigateMessage)
-                    }
-                
-                    // Invisible NavigationLink
-                    NavigationLink(destination: CameraView(), isActive: $navigateToNextPage) {
-                        EmptyView()
-                    }
+//                    if showSuccessMessage {
+//                        Text(navigateMessage)
+//                    }
+//                
+//                    // Invisible NavigationLink
+//                    NavigationLink(destination: CameraView(), isActive: $navigateToNextPage) {
+//                        EmptyView()
+//                    }
                 
             }
             .buttonStyle(PlainButtonStyle())
@@ -160,7 +181,9 @@ struct ContentView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity) // Expand to fill available space
             .background(Color(red: 0.1, green: 0.1, blue: 0.1)) // Set the background color of the VStack
-
+            .fullScreenCover(isPresented: $navigateToNextPage) {
+                CameraView()
+            }
             
         }
 

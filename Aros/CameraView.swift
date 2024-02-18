@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct CameraView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @StateObject private var model = DataModel()
  
     private static let barHeightFactor = 0.15
+    
     
     
     var body: some View {
@@ -44,6 +47,7 @@ struct CameraView: View {
             .navigationTitle("Camera")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
             .ignoresSafeArea()
             .statusBar(hidden: true)
         }

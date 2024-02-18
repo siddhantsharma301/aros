@@ -7,7 +7,7 @@
 
 import Foundation
 
-func postPubKeyRequest(userId: String, pubKey: String) {
+func postPubKeyRequest(userId: String, pubKey: String, completion: @escaping (Result<Bool, Error>) -> Void) {
     guard let url = URL(string: "https://aros-dashboard.vercel.app/api/post-pubkey") else { return }
 
     var request = URLRequest(url: url)
@@ -19,21 +19,33 @@ func postPubKeyRequest(userId: String, pubKey: String) {
     request.httpBody = requestData
     print(request)
     
-    
     URLSession.shared.dataTask(with: request) { data, response, error in
-        guard let data = data, error == nil else {
-            print(error?.localizedDescription ?? "No data")
+        if let error = error {
+            completion(.failure(error))
             return
         }
-        
-        print(data)
-        
-        if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-            // TODO
-        } else {
-            print("Error: HTTP request failed")
+
+        guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 || response.statusCode == 400 else {
+            // Handle non-200 responses explicitly if needed, or generalize error handling
+            completion(.failure(URLError(.badServerResponse)))
+            return
+        }
+
+        do {
+            // Assuming the response JSON structure is known and matches ResponseData
+            let jsonData = try JSONDecoder().decode(ResponseData.self, from: data)
+            if jsonData.success {
+                // If the JSON response contains "success: true"
+                completion(.success(true))
+            } else {
+                // If "success" is present but not true, or any other case
+                completion(.success(false))
+            }
+        } catch {
+            completion(.failure(error))
         }
     }.resume()
+    
 }
 
 func getPubKeySigForHashRequest(hash: String, completion: @escaping (Result<(Data, Data), Error>) -> Void) {
