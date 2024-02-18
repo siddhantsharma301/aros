@@ -26,6 +26,8 @@ struct ContentView: View {
     
     init() {
         notFirstTime = privateKeyExists()
+        print("not first time")
+        print(notFirstTime)
         if (notFirstTime) {
             navigateToNextPage = true
         }
@@ -145,6 +147,13 @@ struct ContentView: View {
             }
             .buttonStyle(PlainButtonStyle())
             .padding() // Add padding around the VStack content
+            .onAppear {
+                    self.notFirstTime = privateKeyExists()
+                    if self.notFirstTime {
+                        self.navigateToNextPage = true
+                    }
+                }
+            
         }
     }
     
