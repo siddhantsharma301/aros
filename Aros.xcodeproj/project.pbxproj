@@ -29,6 +29,7 @@
 		35D60E8D2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */; };
 		35D60E8E2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */; };
 		35D60E8F2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */; };
+		873D141E2B81A20D000A4718 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873D141D2B81A20D000A4718 /* LoadingView.swift */; };
 		878655622B8078310077B123 /* ArosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878655612B8078310077B123 /* ArosApp.swift */; };
 		878655642B8078310077B123 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878655632B8078310077B123 /* ContentView.swift */; };
 		878655732B8078330077B123 /* ArosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878655722B8078330077B123 /* ArosTests.swift */; };
@@ -69,6 +70,7 @@
 		35D60E842B808D5D000E2D3D /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		35D60E882B808D80000E2D3D /* PhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollection.swift; sourceTree = "<group>"; };
 		35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetCollection.swift; sourceTree = "<group>"; };
+		873D141D2B81A20D000A4718 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingView.swift; path = ../LoadingView.swift; sourceTree = "<group>"; };
 		8786555E2B8078310077B123 /* Aros.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aros.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		878655612B8078310077B123 /* ArosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArosApp.swift; sourceTree = "<group>"; };
 		878655632B8078310077B123 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		873D141F2B81A307000A4718 /* Preview Assets.xcassets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Preview Assets.xcassets";
+			sourceTree = "<group>";
+		};
 		878655552B8078310077B123 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +143,7 @@
 				35D60E842B808D5D000E2D3D /* Camera.swift */,
 				878655612B8078310077B123 /* ArosApp.swift */,
 				878655632B8078310077B123 /* ContentView.swift */,
+				873D141D2B81A20D000A4718 /* LoadingView.swift */,
 				35D60E802B808CF0000E2D3D /* DataModel.swift */,
 				35D60E762B808B37000E2D3D /* PhotoAsset.swift */,
 				35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */,
@@ -154,6 +164,7 @@
 		878655672B8078330077B123 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				873D141F2B81A307000A4718 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -309,6 +320,7 @@
 				352FE5512B808E7700F2BBF7 /* PhotoCollectionView.swift in Sources */,
 				929DC5AB2B815C1F00C20C53 /* CameraView.swift in Sources */,
 				35D60E772B808B37000E2D3D /* PhotoAsset.swift in Sources */,
+				873D141E2B81A20D000A4718 /* LoadingView.swift in Sources */,
 				35D60E752B808B07000E2D3D /* CachedImageManager.swift in Sources */,
 				352FE5592B808EEA00F2BBF7 /* ThumbnailView.swift in Sources */,
 				352FE5552B808EBD00F2BBF7 /* PhotoLibrary.swift in Sources */,
@@ -491,8 +503,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aros/Preview Content\"";
-				DEVELOPMENT_TEAM = 477L779VY4;
-				ENABLE_PREVIEWS = YES;
+				DEVELOPMENT_TEAM = 7QV9549QSC;
+				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Aros/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Aros camera use";
@@ -509,7 +521,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "aros-12345adaaa";
+				PRODUCT_BUNDLE_IDENTIFIER = "aros-12345adaaaabc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -525,8 +537,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aros/Preview Content\"";
-				DEVELOPMENT_TEAM = 477L779VY4;
-				ENABLE_PREVIEWS = YES;
+				DEVELOPMENT_TEAM = 7QV9549QSC;
+				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Aros/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Aros camera use";
@@ -543,7 +555,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "aros-12345adaaa";
+				PRODUCT_BUNDLE_IDENTIFIER = "aros-12345adaaaabc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
