@@ -19,3 +19,9 @@ struct JsonPublicKey: Codable {
 struct JsonHash: Codable {
     var hash: String
 }
+
+struct JsonHashPubKeySig: Codable {
+    var hash: String
+    var pubKey: String
+    var signature: String
+}

@@ -82,29 +82,39 @@ func getPubKeySigForHashRequest(hash: String, completion: @escaping (Result<(Dat
     }.resume()
 }
 
-//func usernameExists(userId: String)  async throws -> Bool {
-//    guard let url = URL(string: "https://aros-dashboard.vercel.app/api/check-username") else { return false }
-//
-//    var request = URLRequest(url: url)
-//    request.httpMethod = "POST"
-//    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//
-//    let requestBody = Username(userId: userId)
-//    guard let requestData = try? JSONEncoder().encode(requestBody) else { return false }
-//    request.httpBody = requestData
-//    print(request)
-//    
-//    
-//    URLSession.shared.dataTask(with: request) { data, response, error in
-//        guard let data = data, error == nil else {
-//            print(error?.localizedDescription ?? "No data")
-//            return false
-//        }
-//        if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-//            return true
-//        } else {
-//            print("username exists")
-//            return false
-//        }
-//    }.resume()
-//}
+
+//posts an image, consisting of hash, signature, and corresponding public key to verify
+func postHashPubKeySig(hash: String, pubKey: String, signature: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+    guard let url = URL(string: "https://aros-dashboard.vercel.app/api/api/post-image") else {
+        completion(.failure(URLError(.badURL)))
+        return
+    }
+
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+    let requestBody = JsonHashPubKeySig(hash: hash, pubKey: pubKey, signature: signature)  // Ensure JsonHashPubKeySig is properly defined to be encodable
+    do {
+        let requestData = try JSONEncoder().encode(requestBody)
+        request.httpBody = requestData
+    } catch {
+        completion(.failure(error))
+        return 
+    }
+
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        if let error = error {
+            completion(.failure(error))
+            return
+        }
+
+        guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            completion(.failure(URLError(.badServerResponse)))
+            return
+        }
+        completion(.success(true))
+
+        
+    }.resume()
+}
