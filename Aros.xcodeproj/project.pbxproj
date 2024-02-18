@@ -517,8 +517,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aros/Preview Content\"";
-				DEVELOPMENT_TEAM = 7QV9549QSC;
-				ENABLE_PREVIEWS = NO;
+				DEVELOPMENT_TEAM = BC4N6HVBUG;
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Aros/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Aros camera use";
@@ -535,11 +535,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = "aros-12345adaaaabc";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = "aros-1235467";
->>>>>>> 3e8ad944f8eb131080e957b64da5e2ef771812e1
+				PRODUCT_BUNDLE_IDENTIFIER = "aros-123";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -555,8 +551,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aros/Preview Content\"";
-				DEVELOPMENT_TEAM = 7QV9549QSC;
-				ENABLE_PREVIEWS = NO;
+				DEVELOPMENT_TEAM = BC4N6HVBUG;
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Aros/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Aros camera use";
@@ -573,11 +569,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = "aros-12345adaaaabc";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = "aros-1235467";
->>>>>>> 3e8ad944f8eb131080e957b64da5e2ef771812e1
+				PRODUCT_BUNDLE_IDENTIFIER = "aros-123";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
