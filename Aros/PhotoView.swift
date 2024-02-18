@@ -178,6 +178,9 @@ struct VerificationSheetView: View {
 
     var body: some View {
         VStack {
+            Label("Verification Icon", systemImage: (verificationSuccess ? "checkmark.seal.fill" : "xmark.seal.fill"))
+                    .labelStyle(.iconOnly)
+                    .font(.system(size: 128))
             Text("Verification " + (verificationSuccess ? "Succeeded" : "Failed"))
                 .font(.title)
                 .padding(50)
