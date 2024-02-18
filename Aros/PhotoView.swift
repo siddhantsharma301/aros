@@ -77,6 +77,33 @@ struct PhotoView: View {
                         if let data = data {
                             let hashedData = hashImageData(photoData: data)
                             print("hashed data is \(hashedData)")
+                            getPubKeySigForHashRequest(hash: hashedData.compactMap { String(format: "%02x", $0) }.joined()) { result in
+                                switch result {
+                                    case .success(let (pubKey, signature)):
+                                        print("Signature Data: \(signature)")
+                                        let pubKeyAttributes: [String: Any] = [
+                                            kSecAttrKeyType as String: kSecAttrKeyTypeECSECPrimeRandom,
+                                            kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
+                                            kSecAttrKeySizeInBits as String: 256
+                                        ]
+                                        var pkError: Unmanaged<CFError>?
+                                        guard let pubKey = SecKeyCreateWithData(pubKey as CFData, pubKeyAttributes as CFDictionary, &pkError) else {
+                                            return
+                                        }
+                                        let algorithm: SecKeyAlgorithm = .ecdsaSignatureMessageX962SHA256
+                                        var error: Unmanaged<CFError>?
+                                        let isValid = SecKeyVerifySignature(
+                                            pubKey,
+                                            algorithm,
+                                            Data(hashedData) as CFData,
+                                            signature as CFData,
+                                            &error
+                                        )
+                                        print("is signature valid? \(isValid)")
+                                    case .failure(let error):
+                                        print("Error: \(error.localizedDescription)")
+                                }
+                            }
                         } else if let error = error {
                             print("Error fetching image data: \(error.localizedDescription)")
                         }
