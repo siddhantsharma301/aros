@@ -1,0 +1,15 @@
+[workspace]
+[package]
+version = "0.1.0"
+name = "secp256r1-sigverify-program"
+edition = "2021"
+
+[dependencies]
+sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git" }
+p256 = "0.9.0"
+ecdsa = { version = "0.12.4" }
+hex-literal = "0.4.1"
+
+[patch.crates-io]
+# Patch sha2 so we can use sha precompiles
+sha2-v0-10-6 = { git = "https://github.com/succinctbot/RustCrypto-hashes.git", package = "sha2", branch = "main" }
