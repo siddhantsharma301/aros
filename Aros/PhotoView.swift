@@ -75,15 +75,11 @@ struct PhotoView: View {
                 Task {
                     imageData(for: asset) { data, error in
                         if let data = data {
-                            // Use the image data, for example, to create a UIImage
                             let hashedData = hashImageData(photoData: data)
-                            print("hashed data in library is \(hashedData)")
                         } else if let error = error {
-                            // Handle the error
                             print("Error fetching image data: \(error.localizedDescription)")
                         }
                     }
-//                    let hashedData = hashImageData(photoData: imageData)
                 }
             } label: {
                 Label("Verify", systemImage: "checkmark.shield")
