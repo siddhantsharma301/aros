@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CameraView: View {
     @StateObject private var model = DataModel()
+    @State private var showPopover = false
  
     private static let barHeightFactor = 0.15
     
@@ -17,7 +18,11 @@ struct CameraView: View {
         NavigationStack {
             GeometryReader { geometry in
                 ViewfinderView(image:  $model.viewfinderImage )
-                    .overlay(alignment: .top) {
+                    .overlay(alignment: .bottom) {
+                        buttonsView()
+                            .frame(height: geometry.size.height * Self.barHeightFactor)
+                            .background(.black.opacity(0.75))
+                    }
                         Color.black
                             .opacity(0.75)
                             .frame(height: geometry.size.height * Self.barHeightFactor)
@@ -71,6 +76,7 @@ struct CameraView: View {
             }
             
             Button {
+                showPopover  = true
                 model.camera.takePhoto()
             } label: {
                 Label {
@@ -86,6 +92,9 @@ struct CameraView: View {
                     }
                 }
             }
+            .popover(isPresented: $showPopover) {
+                LoadingPopover()
+            }
             
             Button {
                 model.camera.switchCaptureDevice()
@@ -94,7 +103,6 @@ struct CameraView: View {
                     .font(.system(size: 36, weight: .bold))
                     .foregroundColor(.white)
             }
-            
             Spacer()
         
         }
