@@ -76,6 +76,7 @@ struct PhotoView: View {
                     imageData(for: asset) { data, error in
                         if let data = data {
                             let hashedData = hashImageData(photoData: data)
+                            print("hashed data is \(hashedData)")
                         } else if let error = error {
                             print("Error fetching image data: \(error.localizedDescription)")
                         }
