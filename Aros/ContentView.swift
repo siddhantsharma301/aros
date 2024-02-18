@@ -69,14 +69,14 @@ struct ContentView: View {
                 
                 Button(action: {
                         // Your onClick action here
-                        // TODO (anjan): upload (username, public key) to registry
                         print("Key being generated")
-                        
                         if retrievePrivateKey() == nil {
                             // Key does not exist, so create it.
-                            let accessControl = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
-                                                                                kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-                                                                                [.privateKeyUsage, .biometryAny], nil)!
+                            let accessControl = SecAccessControlCreateWithFlags(
+                                kCFAllocatorDefault,
+                                kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+                                [.privateKeyUsage, .biometryAny], nil
+                            )!
                             let attributes: [String: Any] = [
                                 kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
                                 kSecAttrKeySizeInBits as String:      256,
@@ -101,9 +101,11 @@ struct ContentView: View {
 
                             if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
                                 print("Public Key: \(publicKeyData.base64EncodedString())")
+                                postPubKeyRequest(userId: username, pubKey: publicKeyData.base64EncodedString())
                             } else {
                                 print("Failed to extract public key for logging.")
                             }
+                            
                         } else {
                             // Key already exists, proceed with your logic, e.g., retrieving the key.
                             print("Key pair already exists.")
@@ -111,7 +113,7 @@ struct ContentView: View {
                         }
                     
                         showSuccessMessage = true
-                                        
+                        
                         // Wait for 1.5 seconds, then navigate
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                             navigateToNextPage = true
@@ -186,6 +188,8 @@ struct ContentView: View {
             return nil
         }
     }
+    
+
     
     
 }

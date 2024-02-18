@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Photos
+import CryptoKit
 
 struct PhotoView: View {
     var asset: PhotoAsset
@@ -50,7 +51,6 @@ struct PhotoView: View {
     
     private func buttonsView() -> some View {
         HStack(spacing: 60) {
-            
             Button {
                 Task {
                     await asset.setIsFavorite(!asset.isFavorite)
@@ -71,11 +71,90 @@ struct PhotoView: View {
                 Label("Delete", systemImage: "trash")
                     .font(.system(size: 24))
             }
+            Button {
+                Task {
+                    imageData(for: asset) { data, error in
+                        if let data = data {
+                            let hashedData = hashImageData(photoData: data)
+                            print("hashed data is \(hashedData)")
+                            getPubKeySigForHashRequest(hash: hashedData.compactMap { String(format: "%02x", $0) }.joined()) { result in
+                                switch result {
+                                    case .success(let (pubKey, signature)):
+                                        print("Signature Data: \(signature)")
+                                        let pubKeyAttributes: [String: Any] = [
+                                            kSecAttrKeyType as String: kSecAttrKeyTypeECSECPrimeRandom,
+                                            kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
+                                            kSecAttrKeySizeInBits as String: 256
+                                        ]
+                                        var pkError: Unmanaged<CFError>?
+                                        guard let pubKey = SecKeyCreateWithData(pubKey as CFData, pubKeyAttributes as CFDictionary, &pkError) else {
+                                            return
+                                        }
+                                        let algorithm: SecKeyAlgorithm = .ecdsaSignatureMessageX962SHA256
+                                        var error: Unmanaged<CFError>?
+                                        let isValid = SecKeyVerifySignature(
+                                            pubKey,
+                                            algorithm,
+                                            Data(hashedData) as CFData,
+                                            signature as CFData,
+                                            &error
+                                        )
+                                        print("is signature valid? \(isValid)")
+                                    case .failure(let error):
+                                        print("Error: clownclown")
+                                }
+                            }
+                        } else if let error = error {
+                            print("Error fetching image data: \(error.localizedDescription)")
+                        }
+                    }
+                }
+            } label: {
+                Label("Verify", systemImage: "checkmark.shield")
+                    .font(.system(size: 24))
+            }
         }
         .buttonStyle(.plain)
         .labelStyle(.iconOnly)
         .padding(EdgeInsets(top: 20, leading: 30, bottom: 20, trailing: 30))
         .background(Color.secondary.colorInvert())
         .cornerRadius(15)
+    }
+    
+    private func hashImageData(photoData: Data) -> SHA256Digest {
+        let hash = SHA256.hash(data: photoData)
+        return hash as SHA256Digest
+    }
+    
+    private func imageData(for photoAsset: PhotoAsset, completion: @escaping (Data?, Error?) -> Void) {
+        // Ensure that there is a PHAsset instance associated with the PhotoAsset
+        guard let phAsset = photoAsset.phAsset else {
+            completion(nil, NSError(domain: "PhotoAssetError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Missing PHAsset"]))
+            return
+        }
+
+        // Options for the image data request
+        let options = PHImageRequestOptions()
+        options.version = .original // Request the original image data
+        options.isSynchronous = false // Perform the request asynchronously
+        options.deliveryMode = .highQualityFormat // Request the image in high quality
+
+        // Request the image data
+        PHImageManager.default().requestImageDataAndOrientation(for: phAsset, options: options) { imageData, dataUTI, orientation, info in
+            // Check for errors in the info dictionary
+            if let error = info?[PHImageErrorKey] as? Error {
+                completion(nil, error)
+                return
+            }
+
+            // Check if the request was cancelled
+            if let cancelled = (info?[PHImageCancelledKey] as? NSNumber)?.boolValue, cancelled {
+                completion(nil, NSError(domain: "PhotoAssetError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Request was cancelled"]))
+                return
+            }
+
+            // Return the image data
+            completion(imageData, nil)
+        }
     }
 }
