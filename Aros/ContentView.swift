@@ -22,6 +22,9 @@ struct ContentView: View {
     @State private var navigateMessage = "Keys successfully generated."
     
     @State private var username: String = ""
+    @State private var showingLoader = false
+    @State private var currentStep = 0
+    @State private var progress = 0.0
     
     init() {
         notFirstTime = privateKeyExists()
@@ -39,7 +42,7 @@ struct ContentView: View {
     
     func repeatVibration(numberOfTimes: Int, interval: TimeInterval) {
         guard numberOfTimes > 0 else { return }
-
+        
         // Trigger initial vibration
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         
@@ -50,6 +53,8 @@ struct ContentView: View {
     }
     
     var body: some View {
+        @StateObject var model = DataModel()
+        
         NavigationView {
             VStack(spacing: 20) { // Adjust the spacing as needed
                 Image("aroslogo") // The name of the image in your asset catalog
@@ -65,82 +70,85 @@ struct ContentView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal, 50)
                 
+                if model.isShowingLoader {
+                    LoadingView(isShowing: $model.isShowingLoader)
+                }
                 
                 Button(action: {
-                        // Your onClick action here
-                        // TODO (anjan): upload (username, public key) to registry
-                        print("Key being generated")
-                        
-                        if retrievePrivateKey() == nil {
-                            // Key does not exist, so create it.
-                            let accessControl = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
-                                                                                kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-                                                                                [.privateKeyUsage, .biometryAny], nil)!
-                            let attributes: [String: Any] = [
-                                kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
-                                kSecAttrKeySizeInBits as String:      256,
-                                kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave,
-                                kSecPrivateKeyAttrs as String: [
-                                    kSecAttrIsPermanent as String:    true,
-                                    kSecAttrAccessControl as String:   accessControl,
-                                    kSecAttrLabel as String:           "com.aros.privatekey"
-                                ]
+                    // Your onClick action here
+                    // TODO (anjan): upload (username, public key) to registry
+                    print("Key being generated")
+                    
+                    if retrievePrivateKey() == nil {
+                        // Key does not exist, so create it.
+                        let accessControl = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
+                                                                            kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+                                                                            [.privateKeyUsage, .biometryAny], nil)!
+                        let attributes: [String: Any] = [
+                            kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
+                            kSecAttrKeySizeInBits as String:      256,
+                            kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave,
+                            kSecPrivateKeyAttrs as String: [
+                                kSecAttrIsPermanent as String:    true,
+                                kSecAttrAccessControl as String:   accessControl,
+                                kSecAttrLabel as String:           "com.aros.privatekey"
                             ]
-
-                            var error: Unmanaged<CFError>?
-                            guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
-                                print("Error creating key: \((error!.takeRetainedValue() as Error).localizedDescription)")
-                                return
-                            }
-
-                            guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
-                                print("Error retrieving public key")
-                                return
-                            }
-
-                            if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
-                                print("Public Key: \(publicKeyData.base64EncodedString())")
-                            } else {
-                                print("Failed to extract public key for logging.")
-                            }
+                        ]
+                        
+                        var error: Unmanaged<CFError>?
+                        guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
+                            print("Error creating key: \((error!.takeRetainedValue() as Error).localizedDescription)")
+                            return
+                        }
+                        
+                        guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
+                            print("Error retrieving public key")
+                            return
+                        }
+                        
+                        if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
+                            print("Public Key: \(publicKeyData.base64EncodedString())")
                         } else {
-                            // Key already exists, proceed with your logic, e.g., retrieving the key.
-                            print("Key pair already exists.")
-                            navigateMessage = "Key pair already exists."
+                            print("Failed to extract public key for logging.")
                         }
+                    } else {
+                        // Key already exists, proceed with your logic, e.g., retrieving the key.
+                        print("Key pair already exists.")
+                        navigateMessage = "Key pair already exists."
+                    }
                     
-                        showSuccessMessage = true
-                                        
-                        // Wait for 1.5 seconds, then navigate
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                            navigateToNextPage = true
-                        }
+                    showSuccessMessage = true
                     
-                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-                        }
-    
+                    // Wait for 1.5 seconds, then navigate
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        navigateToNextPage = true
+                    }
+                    
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                }
+                       
                 ) {
-                        Text("Generate Key in Secure Enclave")
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                        
-                        
-                    }.disabled(username.isEmpty)
+                    Text("Generate Key in Secure Enclave")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                     
-                    if showSuccessMessage {
-                        Text(navigateMessage)
-                    }
+                    
+                }.disabled(username.isEmpty)
                 
-                    // Invisible NavigationLink
-                    NavigationLink(destination: CameraView(), isActive: $navigateToNextPage) {
-                        EmptyView()
-                    }
+                if showSuccessMessage {
+                    Text(navigateMessage)
+                }
+                
+                // Invisible NavigationLink
+                NavigationLink(destination: CameraView(), isActive: $navigateToNextPage) {
+                    EmptyView()
+                }
                 
             }
             .buttonStyle(PlainButtonStyle())
-            .padding() // Add padding around the VStack content
+            .padding()
         }
     }
     

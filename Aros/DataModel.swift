@@ -17,6 +17,7 @@ final class DataModel: ObservableObject {
     
     @Published var viewfinderImage: Image?
     @Published var thumbnailImage: Image?
+    @Published var isShowingLoader = false
     
     var isPhotosLoaded = false
     
@@ -46,6 +47,8 @@ final class DataModel: ObservableObject {
             .compactMap { self.unpackPhoto($0) }
         
         for await photoData in unpackedPhotoStream {
+            isShowingLoader = true
+            try? await Task.sleep(nanoseconds: 6_000_000_000)
             Task { @MainActor in
                 thumbnailImage = photoData.thumbnailImage
                 let hashedData = hashImageData(photoData: photoData.imageData)
@@ -67,6 +70,8 @@ final class DataModel: ObservableObject {
                 }
             }
             savePhoto(imageData: photoData.imageData)
+            
+            isShowingLoader = false
         }
     }
     
