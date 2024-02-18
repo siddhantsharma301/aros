@@ -37,6 +37,9 @@
 		8786557F2B8078330077B123 /* ArosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8786557E2B8078330077B123 /* ArosUITestsLaunchTests.swift */; };
 		929DC5AB2B815C1F00C20C53 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DC5AA2B815C1F00C20C53 /* CameraView.swift */; };
 		929DC5AD2B815CA700C20C53 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 929DC5AC2B815CA700C20C53 /* Asset.xcassets */; };
+		929DC5AF2B81865B00C20C53 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DC5AE2B81865B00C20C53 /* RequestManager.swift */; };
+		92ED2B402B8189F800B85D6F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92ED2B3F2B8189F800B85D6F /* Preview Assets.xcassets */; };
+		92ED2B422B818E0400B85D6F /* RequestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED2B412B818E0400B85D6F /* RequestSerialization.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +84,9 @@
 		8786557E2B8078330077B123 /* ArosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		929DC5AA2B815C1F00C20C53 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		929DC5AC2B815CA700C20C53 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
+		929DC5AE2B81865B00C20C53 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		92ED2B3F2B8189F800B85D6F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		92ED2B412B818E0400B85D6F /* RequestSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSerialization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +154,6 @@
 				35D60E762B808B37000E2D3D /* PhotoAsset.swift */,
 				35D60E8C2B808DA8000E2D3D /* PhotoAssetCollection.swift */,
 				35D60E882B808D80000E2D3D /* PhotoCollection.swift */,
-				878655672B8078330077B123 /* Preview Content */,
 				352FE5502B808E7700F2BBF7 /* PhotoCollectionView.swift */,
 				352FE5522B808E9800F2BBF7 /* PhotoItemView.swift */,
 				352FE5542B808EBD00F2BBF7 /* PhotoLibrary.swift */,
@@ -157,10 +162,14 @@
 				35D60E7C2B808C44000E2D3D /* ViewfinderView.swift */,
 				929DC5AA2B815C1F00C20C53 /* CameraView.swift */,
 				929DC5AC2B815CA700C20C53 /* Asset.xcassets */,
+				929DC5AE2B81865B00C20C53 /* RequestManager.swift */,
+				92ED2B3F2B8189F800B85D6F /* Preview Assets.xcassets */,
+				92ED2B412B818E0400B85D6F /* RequestSerialization.swift */,
 			);
 			path = Aros;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		878655672B8078330077B123 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +178,8 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+=======
+>>>>>>> 3e8ad944f8eb131080e957b64da5e2ef771812e1
 		878655712B8078330077B123 /* ArosTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92ED2B402B8189F800B85D6F /* Preview Assets.xcassets in Resources */,
 				929DC5AD2B815CA700C20C53 /* Asset.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,10 +330,12 @@
 				878655642B8078310077B123 /* ContentView.swift in Sources */,
 				352FE5572B808ECE00F2BBF7 /* PhotoView.swift in Sources */,
 				352FE5512B808E7700F2BBF7 /* PhotoCollectionView.swift in Sources */,
+				929DC5AF2B81865B00C20C53 /* RequestManager.swift in Sources */,
 				929DC5AB2B815C1F00C20C53 /* CameraView.swift in Sources */,
 				35D60E772B808B37000E2D3D /* PhotoAsset.swift in Sources */,
 				873D141E2B81A20D000A4718 /* LoadingView.swift in Sources */,
 				35D60E752B808B07000E2D3D /* CachedImageManager.swift in Sources */,
+				92ED2B422B818E0400B85D6F /* RequestSerialization.swift in Sources */,
 				352FE5592B808EEA00F2BBF7 /* ThumbnailView.swift in Sources */,
 				352FE5552B808EBD00F2BBF7 /* PhotoLibrary.swift in Sources */,
 				35D60E7D2B808C44000E2D3D /* ViewfinderView.swift in Sources */,
@@ -521,7 +535,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = "aros-12345adaaaabc";
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = "aros-1235467";
+>>>>>>> 3e8ad944f8eb131080e957b64da5e2ef771812e1
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -555,7 +573,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = "aros-12345adaaaabc";
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = "aros-1235467";
+>>>>>>> 3e8ad944f8eb131080e957b64da5e2ef771812e1
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -29,6 +29,8 @@ struct ContentView: View {
     
     init() {
         notFirstTime = privateKeyExists()
+        print("not first time")
+        print(notFirstTime)
         if (notFirstTime) {
             navigateToNextPage = true
         }
@@ -76,46 +78,58 @@ struct ContentView: View {
                     .padding(.horizontal, 50)
                 
                 Button(action: {
-                    // Your onClick action here
-                    // TODO (anjan): upload (username, public key) to registry
-                    print("Key being generated")
-                    
-                    if retrievePrivateKey() == nil {
-                        // Key does not exist, so create it.
-                        let accessControl = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
-                                                                            kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-                                                                            [.privateKeyUsage, .biometryAny], nil)!
-                        let attributes: [String: Any] = [
-                            kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
-                            kSecAttrKeySizeInBits as String:      256,
-                            kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave,
-                            kSecPrivateKeyAttrs as String: [
-                                kSecAttrIsPermanent as String:    true,
-                                kSecAttrAccessControl as String:   accessControl,
-                                kSecAttrLabel as String:           "com.aros.privatekey"
+                        // Your onClick action here
+                        print("Key being generated")
+                        if retrievePrivateKey() == nil {
+                            // Key does not exist, so create it.
+                            let accessControl = SecAccessControlCreateWithFlags(
+                                kCFAllocatorDefault,
+                                kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+                                [.privateKeyUsage, .biometryAny], nil
+                            )!
+                            let attributes: [String: Any] = [
+                                kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
+                                kSecAttrKeySizeInBits as String:      256,
+                                kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave,
+                                kSecPrivateKeyAttrs as String: [
+                                    kSecAttrIsPermanent as String:    true,
+                                    kSecAttrAccessControl as String:   accessControl,
+                                    kSecAttrLabel as String:           "com.aros.privatekey"
+                                ]
                             ]
-                        ]
-                        
-                        var error: Unmanaged<CFError>?
-                        guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
-                            print("Error creating key: \((error!.takeRetainedValue() as Error).localizedDescription)")
-                            return
-                        }
-                        
-                        guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
-                            print("Error retrieving public key")
-                            return
-                        }
-                        
-                        if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
-                            print("Public Key: \(publicKeyData.base64EncodedString())")
+
+                            var error: Unmanaged<CFError>?
+                            guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
+                                print("Error creating key: \((error!.takeRetainedValue() as Error).localizedDescription)")
+                                return
+                            }
+
+                            guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
+                                print("Error retrieving public key")
+                                return
+                            }
+
+                            if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
+                                print("Public Key: \(publicKeyData.base64EncodedString())")
+                                postPubKeyRequest(userId: username, pubKey: publicKeyData.base64EncodedString())
+                            } else {
+                                print("Failed to extract public key for logging.")
+                            }
+
                         } else {
                             print("Failed to extract public key for logging.")
                         }
-                    } else {
-                        // Key already exists, proceed with your logic, e.g., retrieving the key.
-                        print("Key pair already exists.")
-                        navigateMessage = "Key pair already exists."
+
+                    
+                        showSuccessMessage = true
+                        
+                        // Wait for 1.5 seconds, then navigate
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            navigateToNextPage = true
+                        }
+                    
+                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                        
                     }
                     
                     showSuccessMessage = true
@@ -149,7 +163,14 @@ struct ContentView: View {
                 
             }
             .buttonStyle(PlainButtonStyle())
-            .padding()
+            .padding() // Add padding around the VStack content
+            .onAppear {
+                    self.notFirstTime = privateKeyExists()
+                    if self.notFirstTime {
+                        self.navigateToNextPage = true
+                    }
+                }
+            
         }
     }
     
@@ -193,6 +214,8 @@ struct ContentView: View {
             return nil
         }
     }
+    
+
     
     
 }
