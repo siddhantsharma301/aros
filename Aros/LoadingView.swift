@@ -61,8 +61,10 @@ struct LoadingView: View {
 }
 
 struct LoadingView_Previews: PreviewProvider {
+    @State static var isShowingPreview = true
+    
     static var previews: some View {
-        LoadingView(progress: .constant(50), currentStep: .constant(1))
+        LoadingView(isShowing: $isShowingPreview)
     }
 }
 
