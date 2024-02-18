@@ -7,15 +7,18 @@
 
 import SwiftUI
 import os.log
+import UIKit
 
 struct PhotoCollectionView: View {
     @ObservedObject var photoCollection : PhotoCollection
     
     @Environment(\.displayScale) private var displayScale
         
-    private static let itemSpacing = 12.0
-    private static let itemCornerRadius = 15.0
-    private static let itemSize = CGSize(width: 90, height: 90)
+    private static let itemSpacing = 1.0
+    // private static let itemCornerRadius = 1.0
+    private static let screenBounds = UIScreen.main.bounds
+    private static let itemDim = min(screenBounds.width / 3 - itemSpacing, screenBounds.height / 3 - itemSpacing)
+    private static let itemSize = CGSize(width: itemDim, height: itemDim)
     
     private var imageSize: CGSize {
         return CGSize(width: Self.itemSize.width * min(displayScale, 2), height: Self.itemSize.height * min(displayScale, 2))
@@ -49,7 +52,7 @@ struct PhotoCollectionView: View {
         PhotoItemView(asset: asset, cache: photoCollection.cache, imageSize: imageSize)
             .frame(width: Self.itemSize.width, height: Self.itemSize.height)
             .clipped()
-            .cornerRadius(Self.itemCornerRadius)
+            // .cornerRadius(Self.itemCornerRadius)
             .overlay(alignment: .bottomLeading) {
                 if asset.isFavorite {
                     Image(systemName: "heart.fill")
