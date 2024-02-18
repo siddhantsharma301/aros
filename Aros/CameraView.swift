@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct CameraView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @StateObject private var model = DataModel()
     @State private var isShowingSheet = false
     @State private var currentTextIndex = 0
     @State private var texts = ["Hashing Image", "Signing via Secure Enclave", "Committing to Registry"]
  
     private static let barHeightFactor = 0.15
-    
+
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
@@ -46,6 +48,7 @@ struct CameraView: View {
             .navigationTitle("Camera")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
             .ignoresSafeArea()
             .statusBar(hidden: true)
         }
