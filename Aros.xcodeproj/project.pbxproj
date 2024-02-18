@@ -39,6 +39,7 @@
 		929DC5AF2B81865B00C20C53 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DC5AE2B81865B00C20C53 /* RequestManager.swift */; };
 		92ED2B402B8189F800B85D6F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92ED2B3F2B8189F800B85D6F /* Preview Assets.xcassets */; };
 		92ED2B422B818E0400B85D6F /* RequestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED2B412B818E0400B85D6F /* RequestSerialization.swift */; };
+		92ED2B462B82061A00B85D6F /* SplashModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED2B452B82061A00B85D6F /* SplashModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		929DC5AE2B81865B00C20C53 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		92ED2B3F2B8189F800B85D6F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		92ED2B412B818E0400B85D6F /* RequestSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSerialization.swift; sourceTree = "<group>"; };
+		92ED2B452B82061A00B85D6F /* SplashModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				929DC5AE2B81865B00C20C53 /* RequestManager.swift */,
 				92ED2B3F2B8189F800B85D6F /* Preview Assets.xcassets */,
 				92ED2B412B818E0400B85D6F /* RequestSerialization.swift */,
+				92ED2B452B82061A00B85D6F /* SplashModalView.swift */,
 			);
 			path = Aros;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				878655622B8078310077B123 /* ArosApp.swift in Sources */,
 				35D60E852B808D5D000E2D3D /* Camera.swift in Sources */,
 				35D60E892B808D80000E2D3D /* PhotoCollection.swift in Sources */,
+				92ED2B462B82061A00B85D6F /* SplashModalView.swift in Sources */,
 				35D60E8D2B808DA8000E2D3D /* PhotoAssetCollection.swift in Sources */,
 				35D60E812B808CF0000E2D3D /* DataModel.swift in Sources */,
 			);
