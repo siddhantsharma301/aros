@@ -70,13 +70,13 @@ struct ContentView: View {
                 Button(action: {
                         // Your onClick action here
                         print("Key being generated")
-//                        let res = usernameExists(userId: username)
-//                        print(res)
-//                        if retrievePrivateKey() == nil {
+                        if retrievePrivateKey() == nil {
                             // Key does not exist, so create it.
-                            let accessControl = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
-                                                                                kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-                                                                                [.privateKeyUsage, .biometryAny], nil)!
+                            let accessControl = SecAccessControlCreateWithFlags(
+                                kCFAllocatorDefault,
+                                kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+                                [.privateKeyUsage, .biometryAny], nil
+                            )!
                             let attributes: [String: Any] = [
                                 kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
                                 kSecAttrKeySizeInBits as String:      256,
@@ -106,11 +106,11 @@ struct ContentView: View {
                                 print("Failed to extract public key for logging.")
                             }
                             
-//                        } else {
-//                            // Key already exists, proceed with your logic, e.g., retrieving the key.
-//                            print("Key pair already exists.")
-//                            navigateMessage = "Key pair already exists."
-//                        }
+                        } else {
+                            // Key already exists, proceed with your logic, e.g., retrieving the key.
+                            print("Key pair already exists.")
+                            navigateMessage = "Key pair already exists."
+                        }
                     
                         showSuccessMessage = true
                         
