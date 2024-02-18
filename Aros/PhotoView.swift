@@ -10,11 +10,12 @@ import Photos
 import CryptoKit
 
 struct PhotoView: View {
-    var asset: PhotoAsset
+    @State var asset: PhotoAsset
     var cache: CachedImageManager?
     @State private var image: Image?
     @State private var imageRequestID: PHImageRequestID?
-    @Environment(\.dismiss) var dismiss
+    @State private var verificationSuccess = false
+    @State private var isShowingSheet = false
     private let imageSize = CGSize(width: 1024, height: 1024)
     
     var body: some View {
@@ -30,11 +31,14 @@ struct PhotoView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
-        .background(Color.secondary)
+        .background(Color.black)
         .navigationTitle("Photo")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $isShowingSheet) {
+            VerificationSheetView(isShowingSheet: $isShowingSheet, verificationSuccess: $verificationSuccess)
+        }
         .overlay(alignment: .bottom) {
-            buttonsView()
+            ButtonOverlayView(verificationSuccess: $verificationSuccess, isShowingSheet: $isShowingSheet, asset: $asset)
                 .offset(x: 0, y: -50)
         }
         .task {
@@ -48,8 +52,15 @@ struct PhotoView: View {
             }
         }
     }
+}
+
+struct ButtonOverlayView : View {
+    @Environment(\.dismiss) var dismiss
+    @Binding var verificationSuccess: Bool
+    @Binding var isShowingSheet: Bool
+    @Binding var asset: PhotoAsset
     
-    private func buttonsView() -> some View {
+    var body: some View {
         HStack(spacing: 60) {
             Button {
                 Task {
@@ -59,7 +70,6 @@ struct PhotoView: View {
                 Label("Favorite", systemImage: asset.isFavorite ? "heart.fill" : "heart")
                     .font(.system(size: 24))
             }
-
             Button {
                 Task {
                     await asset.delete()
@@ -80,7 +90,6 @@ struct PhotoView: View {
                             getPubKeySigForHashRequest(hash: hashedData.compactMap { String(format: "%02x", $0) }.joined()) { result in
                                 switch result {
                                     case .success(let (pubKey, signature)):
-                                        print("Signature Data: \(signature)")
                                         let pubKeyAttributes: [String: Any] = [
                                             kSecAttrKeyType as String: kSecAttrKeyTypeECSECPrimeRandom,
                                             kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
@@ -100,8 +109,12 @@ struct PhotoView: View {
                                             &error
                                         )
                                         print("is signature valid? \(isValid)")
+                                        verificationSuccess = isValid
+                                        isShowingSheet = true
                                     case .failure(let error):
                                         print("Error: clownclown \(error)")
+                                        verificationSuccess = false
+                                        isShowingSheet = true
                                 }
                             }
                         } else if let error = error {
@@ -158,3 +171,20 @@ struct PhotoView: View {
         }
     }
 }
+
+struct VerificationSheetView: View {
+    @Binding var isShowingSheet: Bool
+    @Binding var verificationSuccess: Bool
+
+    var body: some View {
+        VStack {
+            Text("Verification " + (verificationSuccess ? "Succeeded" : "Failed"))
+                .font(.title)
+                .padding(50)
+            Button("Dismiss") {
+                isShowingSheet = false
+            }
+        }
+    }
+}
+
