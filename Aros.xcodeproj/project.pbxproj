@@ -39,6 +39,7 @@
 		929DC5AF2B81865B00C20C53 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DC5AE2B81865B00C20C53 /* RequestManager.swift */; };
 		92ED2B402B8189F800B85D6F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92ED2B3F2B8189F800B85D6F /* Preview Assets.xcassets */; };
 		92ED2B422B818E0400B85D6F /* RequestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED2B412B818E0400B85D6F /* RequestSerialization.swift */; };
+		92ED2B442B81B78800B85D6F /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED2B432B81B78800B85D6F /* ModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		929DC5AE2B81865B00C20C53 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		92ED2B3F2B8189F800B85D6F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		92ED2B412B818E0400B85D6F /* RequestSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSerialization.swift; sourceTree = "<group>"; };
+		92ED2B432B81B78800B85D6F /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				929DC5AE2B81865B00C20C53 /* RequestManager.swift */,
 				92ED2B3F2B8189F800B85D6F /* Preview Assets.xcassets */,
 				92ED2B412B818E0400B85D6F /* RequestSerialization.swift */,
+				92ED2B432B81B78800B85D6F /* ModalView.swift */,
 			);
 			path = Aros;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				929DC5AF2B81865B00C20C53 /* RequestManager.swift in Sources */,
 				929DC5AB2B815C1F00C20C53 /* CameraView.swift in Sources */,
 				35D60E772B808B37000E2D3D /* PhotoAsset.swift in Sources */,
+				92ED2B442B81B78800B85D6F /* ModalView.swift in Sources */,
 				35D60E752B808B07000E2D3D /* CachedImageManager.swift in Sources */,
 				92ED2B422B818E0400B85D6F /* RequestSerialization.swift in Sources */,
 				352FE5592B808EEA00F2BBF7 /* ThumbnailView.swift in Sources */,

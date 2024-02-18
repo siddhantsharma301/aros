@@ -25,3 +25,7 @@ struct JsonHashPubKeySig: Codable {
     var pubKey: String
     var signature: String
 }
+
+struct ResponseData: Codable {
+    let success: Bool
+}
