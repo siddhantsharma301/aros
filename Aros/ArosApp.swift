@@ -19,6 +19,7 @@ struct ArosApp: App {
             ContentView()
         }
     }
+    
 }
 
 fileprivate extension UINavigationBar {
