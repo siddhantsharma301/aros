@@ -101,7 +101,7 @@ struct PhotoView: View {
                                         )
                                         print("is signature valid? \(isValid)")
                                     case .failure(let error):
-                                        print("Error: \(error.localizedDescription)")
+                                        print("Error: clownclown")
                                 }
                             }
                         } else if let error = error {

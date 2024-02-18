@@ -37,7 +37,7 @@ func postPubKeyRequest(userId: String, pubKey: String) {
 }
 
 func getPubKeySigForHashRequest(hash: String, completion: @escaping (Result<(Data, Data), Error>) -> Void) {
-    guard let url = URL(string: "https://aros-dashboard.vercel.app/api/api/get-image") else {
+    guard let url = URL(string: "https://aros-dashboard.vercel.app/api/get-signature") else {
         completion(.failure(URLError(.badURL)))
         return
     }
@@ -85,7 +85,7 @@ func getPubKeySigForHashRequest(hash: String, completion: @escaping (Result<(Dat
 
 //posts an image, consisting of hash, signature, and corresponding public key to verify
 func postHashPubKeySig(hash: String, pubKey: String, signature: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-    guard let url = URL(string: "https://aros-dashboard.vercel.app/api/api/post-image") else {
+    guard let url = URL(string: "https://aros-dashboard.vercel.app/api/post-image") else {
         completion(.failure(URLError(.badURL)))
         return
     }

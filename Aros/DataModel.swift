@@ -61,6 +61,27 @@ final class DataModel: ObservableObject {
                             throw error!.takeRetainedValue() as Error
                         }
                         print("Signature: \(signature)")
+                        guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
+                            print("Error retrieving public key")
+                            return
+                        }
+
+                        if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
+                            postHashPubKeySig(
+                                hash: hashedData.compactMap { String(format: "%02x", $0) }.joined(),
+                                pubKey: publicKeyData.base64EncodedString(),
+                                signature: signature.base64EncodedString()
+                            ) { result in
+                                switch result {
+                                case .success(_):
+                                    print("yay")
+                                case .failure(let error):
+                                    print("Error: mf, \(error)")
+                                }
+                            }
+                        } else {
+                            print("Failed to extract public key for logging.")
+                        }
                     }
                 } catch let error {
                     print("signing failed: \(error)")
