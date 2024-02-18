@@ -63,7 +63,7 @@ final class DataModel: ObservableObject {
                         print("Signature: \(signature)")
                     }
                 } catch let error {
-                    print("signing failed")
+                    print("signing failed: \(error)")
                 }
             }
             savePhoto(imageData: photoData.imageData)
