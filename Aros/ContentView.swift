@@ -81,7 +81,7 @@ struct ContentView: View {
                 Button(action: {
                         // Your onClick action here
                         print("Key being generated")
-//                        if retrievePrivateKey() == nil {
+                        if retrievePrivateKey() == nil {
                             // Key does not exist, so create it.
                             let accessControl = SecAccessControlCreateWithFlags(
                                 kCFAllocatorDefault,
@@ -135,11 +135,11 @@ struct ContentView: View {
                                 print("Failed to extract public key for logging.")
                             }
                             
-//                        } else {
-//                            // Key already exists, proceed with your logic, e.g., retrieving the key.
-//                            print("Key pair already exists.")
-//                            navigateMessage = "Key pair already exists."
-//                        }
+                        } else {
+                            // Key already exists, proceed with your logic, e.g., retrieving the key.
+                            print("Key pair already exists.")
+                            navigateMessage = "Key pair already exists."
+                        }
                     
                         showSuccessMessage = true
                         
@@ -175,10 +175,10 @@ struct ContentView: View {
             .buttonStyle(PlainButtonStyle())
             .padding() // Add padding around the VStack content
             .onAppear {
-//                self.notFirstTime = privateKeyExists()
-//                if self.notFirstTime {
-//                    self.navigateToNextPage = true
-//                }
+                self.notFirstTime = privateKeyExists()
+                if self.notFirstTime {
+                    self.navigateToNextPage = true
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity) // Expand to fill available space
             .background(Color(red: 0.1, green: 0.1, blue: 0.1)) // Set the background color of the VStack
