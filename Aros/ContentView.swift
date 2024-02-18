@@ -27,16 +27,16 @@ struct ContentView: View {
     @State private var showModal = false
     @State private var pubKeySuccess = false
     
-    init() {
-        notFirstTime = privateKeyExists()
-        print("not first time")
-        print(notFirstTime)
-        if (notFirstTime) {
-            navigateToNextPage = true
-        }
-        print("init")
-        print(navigateToNextPage)
-    }
+//    init() {
+//        notFirstTime = privateKeyExists()
+//        print("not first time")
+//        print(notFirstTime)
+//        if (notFirstTime) {
+//            navigateToNextPage = true
+//        }
+//        print("init")
+//        print(navigateToNextPage)
+//    }
     
     func triggerHapticFeedback() {
         let generator = UINotificationFeedbackGenerator()
@@ -75,6 +75,7 @@ struct ContentView: View {
                         RoundedRectangle(cornerRadius: 8).fill(Color.white)
                     )
                     .padding(.horizontal, 50)
+                    .foregroundColor(.black)
                 
                 
                 Button(action: {
@@ -142,10 +143,10 @@ struct ContentView: View {
                     
                         showSuccessMessage = true
                         
-                        // Wait for 1.5 seconds, then navigate
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                            navigateToNextPage = true
-                        }
+//                        // Wait for 1.5 seconds, then navigate
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//                            navigateToNextPage = true
+//                        }
                     
                         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                         
@@ -174,15 +175,24 @@ struct ContentView: View {
             .buttonStyle(PlainButtonStyle())
             .padding() // Add padding around the VStack content
             .onAppear {
-                    self.notFirstTime = privateKeyExists()
-                    if self.notFirstTime {
-                        self.navigateToNextPage = true
-                    }
+                self.notFirstTime = privateKeyExists()
+                if self.notFirstTime {
+                    self.navigateToNextPage = true
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity) // Expand to fill available space
             .background(Color(red: 0.1, green: 0.1, blue: 0.1)) // Set the background color of the VStack
             .fullScreenCover(isPresented: $navigateToNextPage) {
                 CameraView()
+            }
+            .sheet(isPresented: $showModal) {
+                // Content of the modal pop-up
+                if self.pubKeySuccess {
+                    SplashModalView(showModal: $showModal, navigateToNextPage: $navigateToNextPage)
+                } else {
+                    SplashModalViewFail(showModal: $showModal, navigateToNextPage: $navigateToNextPage)
+                }
+
             }
             
         }
