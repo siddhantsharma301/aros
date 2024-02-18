@@ -51,7 +51,6 @@ final class DataModel: ObservableObject {
                 let hashedData = hashImageData(photoData: photoData.imageData)
                 do {
                     if let privateKey = retrievePrivateKey() {
-                        print("Successfully retrieved the private key.")
                         let algorithm: SecKeyAlgorithm = .ecdsaSignatureMessageX962SHA256
                         var error: Unmanaged<CFError>?
                         guard let signature = SecKeyCreateSignature(privateKey,

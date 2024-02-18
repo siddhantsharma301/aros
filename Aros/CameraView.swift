@@ -9,9 +9,11 @@ import SwiftUI
 
 struct CameraView: View {
     @StateObject private var model = DataModel()
+    @State private var isShowingSheet = false
+    @State private var currentTextIndex = 0
+    @State private var texts = ["Hashing Image", "Signing via Secure Enclave", "Committing to Registry"]
  
     private static let barHeightFactor = 0.15
-    
     
     var body: some View {
         NavigationStack {
@@ -72,6 +74,8 @@ struct CameraView: View {
             
             Button {
                 model.camera.takePhoto()
+                self.isShowingSheet = true
+                self.currentTextIndex = 0
             } label: {
                 Label {
                     Text("Take Photo")
@@ -83,6 +87,22 @@ struct CameraView: View {
                         Circle()
                             .fill(.white)
                             .frame(width: 50, height: 50)
+                    }
+                }
+            }
+            .sheet(isPresented: $isShowingSheet) {
+                VStack {
+                    ProgressView(value: Float(currentTextIndex) / Float(self.texts.count))
+                        .frame(width: 256)
+                    Text(texts[currentTextIndex])
+                        .padding()
+                }
+                .onReceive(Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()) { _ in
+                    if currentTextIndex < texts.count - 1 {
+                        currentTextIndex += 1
+                    } else {
+                        currentTextIndex += 1
+                        self.isShowingSheet = false
                     }
                 }
             }
@@ -102,20 +122,4 @@ struct CameraView: View {
         .labelStyle(.iconOnly)
         .padding()
     }
-//    var body: some View {
-//        VStack {
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundColor(.accentColor)
-//            Text("Hello, world!")
-//        }
-//        .padding()
-//    }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
-
