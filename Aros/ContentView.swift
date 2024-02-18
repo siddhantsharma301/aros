@@ -158,9 +158,10 @@ struct ContentView: View {
         var item: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &item)
         if status == errSecSuccess {
-            
+            print("true")
             return true
         } else {
+            print("false")
             // Handle error (e.g., key not found)
             return false
         }
