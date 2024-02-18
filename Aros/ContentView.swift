@@ -9,12 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var model = DataModel()
- 
+    @State private var showingLoader = false
     private static let barHeightFactor = 0.15
     
     
     var body: some View {
         NavigationStack {
+            Button("Start Process") {
+                showingLoader = true
+            }
+            if showingLoader {
+                LoadingView()
+            }
             GeometryReader { geometry in
                 ViewfinderView(image:  $model.viewfinderImage )
                     .overlay(alignment: .top) {
