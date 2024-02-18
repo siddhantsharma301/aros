@@ -25,6 +25,7 @@ struct ContentView: View {
     @State private var showingLoader = false
     @State private var currentStep = 0
     @State private var progress = 0.0
+    @StateObject var model = DataModel()
     
     init() {
         notFirstTime = privateKeyExists()
@@ -55,6 +56,10 @@ struct ContentView: View {
     var body: some View {
         @StateObject var model = DataModel()
         
+        if model.isLoading {
+            LoadingView(isShowing: $model.isShowingLoader, currentStep: $model.currentLoadingStep)
+        }
+        
         NavigationView {
             VStack(spacing: 20) { // Adjust the spacing as needed
                 Image("aroslogo") // The name of the image in your asset catalog
@@ -69,10 +74,6 @@ struct ContentView: View {
                 TextField("Enter username", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal, 50)
-                
-                if model.isShowingLoader {
-                    LoadingView(isShowing: $model.isShowingLoader)
-                }
                 
                 Button(action: {
                     // Your onClick action here

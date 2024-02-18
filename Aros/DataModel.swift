@@ -18,6 +18,8 @@ final class DataModel: ObservableObject {
     @Published var viewfinderImage: Image?
     @Published var thumbnailImage: Image?
     @Published var isShowingLoader = false
+    @Published var isLoading = false
+    @Published var currentLoadingStep = 0
     
     var isPhotosLoaded = false
     
@@ -28,6 +30,21 @@ final class DataModel: ObservableObject {
         
         Task {
             await handleCameraPhotos()
+        }
+    }
+    
+    func simulateLoadingSteps() {
+        isLoading = true
+        currentLoadingStep = 0
+        
+        // Simulate each step
+        for step in 0..<3 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(step) * 3.0) {
+                self.currentLoadingStep = step
+                if step == 2 {
+                    self.isLoading = false
+                }
+            }
         }
     }
     

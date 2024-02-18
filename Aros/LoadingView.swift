@@ -9,15 +9,16 @@ import SwiftUI
 
 struct LoadingView: View {
     @State private var progress: Double = 0.0
-    @State private var currentStep: Int = 0
+    @Binding private var currentStep: Int
     @Binding var isShowing: Bool
     
     private let steps = ["Hashing Image", "Signing to Hardware", "Committing to Registry"]
     private let totalSteps: Int
     
-    init(isShowing: Binding<Bool>) {
+    init(isShowing: Binding<Bool>, currentStep: Binding<Int>) {
         _isShowing = isShowing
-        totalSteps = steps.count
+        _currentStep = currentStep
+        self.totalSteps = steps.count
     }
     
     var body: some View {
@@ -47,24 +48,27 @@ struct LoadingView: View {
         currentStep = 0
         progress = 0.0
         
-        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
-            if self.currentStep < self.totalSteps {
-                self.progress = 100.0
-                self.currentStep += 1
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            if self.progress < 100.0 {
+                self.progress += 10.0
             } else {
-                timer.invalidate()
-                self.isShowing = false
+                if self.currentStep < self.totalSteps - 1 {
+                    self.currentStep+=1
+                    self.progress = 0.0
+                } else {
+                    timer.invalidate()
+                    self.isShowing = false
+                }
             }
-            self.progress = 0.0
         }
     }
 }
 
 struct LoadingView_Previews: PreviewProvider {
     @State static var isShowingPreview = true
+    @State static var currentStepPreview = 0
     
     static var previews: some View {
-        LoadingView(isShowing: $isShowingPreview)
+        LoadingView(isShowing: $isShowingPreview, currentStep: $currentStepPreview)
     }
 }
-
