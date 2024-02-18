@@ -97,7 +97,7 @@ struct CameraView: View {
                     Text(texts[currentTextIndex])
                         .padding()
                 }
-                .onReceive(Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()) { _ in
+                .onReceive(Timer.publish(every: 0.35, on: .main, in: .common).autoconnect()) { _ in
                     if currentTextIndex < texts.count - 1 {
                         currentTextIndex += 1
                     } else {
