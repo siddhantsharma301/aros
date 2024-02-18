@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model pubkeys {
+  userId String @id @map("_id")
+  pubKey String
+}
+
+model images {
+  hash String @id @map("_id")
+  signature String
+  pubKey String
+}
