@@ -11,42 +11,42 @@ import Security
 @main
 struct ArosApp: App {
     init() {
-        if retrievePrivateKey() == nil {
-                // Key does not exist, so create it.
-                let accessControl = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
-                                                                    kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-                                                                    [.privateKeyUsage, .biometryAny], nil)!
-                let attributes: [String: Any] = [
-                    kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
-                    kSecAttrKeySizeInBits as String:      256,
-                    kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave,
-                    kSecPrivateKeyAttrs as String: [
-                        kSecAttrIsPermanent as String:    true,
-                        kSecAttrAccessControl as String:   accessControl,
-                        kSecAttrLabel as String:           "com.aros.privatekey"
-                    ]
-                ]
-
-                var error: Unmanaged<CFError>?
-                guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
-                    print("Error creating key: \((error!.takeRetainedValue() as Error).localizedDescription)")
-                    return
-                }
-
-                guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
-                    print("Error retrieving public key")
-                    return
-                }
-
-                if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
-                    print("Public Key: \(publicKeyData.base64EncodedString())")
-                } else {
-                    print("Failed to extract public key for logging.")
-                }
-            } else {
-                // Key already exists, proceed with your logic, e.g., retrieving the key.
-                print("Key pair already exists.")
-            }
+//        if retrievePrivateKey() == nil {
+//                // Key does not exist, so create it.
+//                let accessControl = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
+//                                                                    kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+//                                                                    [.privateKeyUsage, .biometryAny], nil)!
+//                let attributes: [String: Any] = [
+//                    kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
+//                    kSecAttrKeySizeInBits as String:      256,
+//                    kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave,
+//                    kSecPrivateKeyAttrs as String: [
+//                        kSecAttrIsPermanent as String:    true,
+//                        kSecAttrAccessControl as String:   accessControl,
+//                        kSecAttrLabel as String:           "com.aros.privatekey"
+//                    ]
+//                ]
+//
+//                var error: Unmanaged<CFError>?
+//                guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
+//                    print("Error creating key: \((error!.takeRetainedValue() as Error).localizedDescription)")
+//                    return
+//                }
+//
+//                guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
+//                    print("Error retrieving public key")
+//                    return
+//                }
+//
+//                if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
+//                    print("Public Key: \(publicKeyData.base64EncodedString())")
+//                } else {
+//                    print("Failed to extract public key for logging.")
+//                }
+//            } else {
+//                // Key already exists, proceed with your logic, e.g., retrieving the key.
+//                print("Key pair already exists.")
+//            }
         UINavigationBar.applyCustomAppearance()
     }
     
