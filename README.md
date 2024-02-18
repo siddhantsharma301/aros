@@ -15,6 +15,7 @@ We also built a zero-knowledge prover that verifies the signature on your image 
 
 ## How we built it
 This is a system architecture diagram for Aros:
+![Aros Architecture](./assets/system-architecture.png)
 
 ### Secure Enclave
 We create a cryptographic key pair in your iPhone's Secure Enclave to rely on hardware security and ensure that your private keys are never leaked outside your iPhone. Aros uses these keys to sign your photos to prove and verify that you clicked them on your iPhone.
